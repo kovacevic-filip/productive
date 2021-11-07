@@ -31,7 +31,7 @@ class User(models.Model):
     )
 
     def __str__(self):
-        return self.name
+        return f"{self.name} {self.role}"
 
 
 class Loan(models.Model):
