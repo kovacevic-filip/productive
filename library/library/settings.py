@@ -38,8 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'libraryapi.apps.LibraryapiConfig',
-    'rest_framework'
+    'rest_framework',
+    'rest_framework.authtoken'
 ]
+
+AUTH_USER_MODEL = 'libraryapi.User'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

@@ -4,12 +4,13 @@ from .views import *
 
 
 router = routers.DefaultRouter()
-router.register(r'author', AuthorViewSet)
-router.register(r'book', BookViewSet)
-router.register(r'loan', LoanViewSet)
+router.register('login', LoginView, basename='login')
+router.register('author', AuthorViewSet)
+router.register('book', BookViewSet)
+router.register('loan', LoanViewSet)
 
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('routes/', include('rest_framework.urls', namespace='rest_framework'))
+    path('account/logout/', LogoutView.as_view(), name='logout')
 ]

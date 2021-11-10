@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser, Group
 
 
 class Author(models.Model):
@@ -17,21 +18,17 @@ class Book(models.Model):
         return self.title
 
 
-class User(models.Model):
+class User(AbstractUser):
+    groups = models.ForeignKey(Group, on_delete=models.CASCADE)
+    email = models.EmailField(max_length=80, unique=True)
 
-    class UserRole(models.TextChoices):
-        member = "Member"
-        librarian = "Librarian"
+    REQUIRED_FIELDS = ['groups_id']
 
-    name = models.CharField(max_length=60)
-    role = models.CharField(
-        max_length=10,
-        choices=UserRole.choices,
-        default=UserRole.member
-    )
+    def get_full_name(self):
+        return f"{self.first_name} {self.last_name}"
 
     def __str__(self):
-        return f"{self.name} {self.role}"
+        return self.username
 
 
 class Loan(models.Model):
